@@ -24,6 +24,7 @@ export const Container = styled.button`
 
 export const HeaderContent = styled.div`
   display: flex;
+  align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
 
