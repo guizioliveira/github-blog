@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body, input, textarea, button {
-    font: ${({ theme }) => theme.font.m}
+    font: ${({ theme }) => theme.font.text.m}
   }
 
   input {

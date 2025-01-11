@@ -17,11 +17,18 @@ export const defaultTheme = {
   } as const,
   font: {
     family: "'Nunito', sans-serif",
-    xs: `400 12px/160% 'Nunito', sans-serif`,
-    s: `400 14px/160% 'Nunito', sans-serif`,
-    m: `400 16px/160% 'Nunito', sans-serif`,
-    l: `400 18px/160% 'Nunito', sans-serif`,
-    xl: `400 20px/160% 'Nunito', sans-serif`,
-    '2xl': `400 24px/160% 'Nunito', sans-serif`,
+    text: {
+      xs: `400 12px/160% 'Nunito', sans-serif`,
+      s: `400 14px/160% 'Nunito', sans-serif`,
+      m: `400 16px/160% 'Nunito', sans-serif`,
+      l: `400 18px/160% 'Nunito', sans-serif`,
+      xl: `400 20px/160% 'Nunito', sans-serif`,
+      '2xl': `400 24px/160% 'Nunito', sans-serif`,
+    },
+    title: {
+      s: `700 18px/130% 'Nunito', sans-serif`,
+      m: `700 20px/130% 'Nunito', sans-serif`,
+      l: `700 24px/130% 'Nunito', sans-serif`,
+    },
   } as const,
 } as const
