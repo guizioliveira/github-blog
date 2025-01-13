@@ -10,6 +10,8 @@ export const Container = styled.div`
 `
 
 export const Content = styled.div`
+  min-height: 212px;
+
   display: flex;
   align-items: flex-end;
   gap: 2rem;

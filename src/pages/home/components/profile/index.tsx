@@ -8,40 +8,52 @@ import {
   Description,
 } from './styles'
 import { Spacing, LinkButton } from '@/components/ui'
+import { getProfile, GitHubUser } from '@/services/get-profile'
+import { useQuery } from '@tanstack/react-query'
 
 export default function Profile() {
+  const { data } = useQuery<GitHubUser, Error>({
+    queryKey: ['githubProfile'],
+    queryFn: () => getProfile(),
+    staleTime: 5 * 1000, // Fresh data for 5 minutes
+    retry: 2,
+  })
+
   return (
     <Container>
       <Content>
-        <LinkButton href="github.com/guizioliveira">GITHUB</LinkButton>
-        <Picture src="https://avatars.githubusercontent.com/u/21250477?v=4" />
+        {data && (
+          <>
+            <LinkButton href={data.html_url}>GITHUB</LinkButton>
+            <Picture src={data.avatar_url} />
 
-        <Description>
-          <h3>Guilherme de Oliveira</h3>
-          <p>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass.
-          </p>
+            <Description>
+              <h3>{data.name}</h3>
+              <p>{data.bio ?? `...`}</p>
 
-          <Spacing apparence="s" />
+              <Spacing apparence="s" />
 
-          <SocialMediaGroup>
-            <SocialMedia>
-              <FaGithub size={18} />
-              guizioliveira
-            </SocialMedia>
+              <SocialMediaGroup>
+                <SocialMedia>
+                  <FaGithub size={18} />
+                  {data.login}
+                </SocialMedia>
 
-            <SocialMedia>
-              <FaBuilding size={18} />
-              Sicredi
-            </SocialMedia>
+                {data.company && (
+                  <SocialMedia>
+                    <FaBuilding size={18} />
+                    {data.company}
+                  </SocialMedia>
+                )}
 
-            <SocialMedia>
-              <FaUserFriends size={18} />4 Followers
-            </SocialMedia>
-          </SocialMediaGroup>
-        </Description>
+                <SocialMedia>
+                  <FaUserFriends size={18} />
+                  {data.followers} Followers
+                </SocialMedia>
+              </SocialMediaGroup>
+            </Description>
+          </>
+        )}
       </Content>
     </Container>
   )
