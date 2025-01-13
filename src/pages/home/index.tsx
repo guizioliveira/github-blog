@@ -1,7 +1,9 @@
-import Profile from '@/components/profile'
+import Profile from '@/pages/home/components/profile'
 import { Header } from '../../components/header'
-import { Container, Posts } from './styles'
+import { Container, HeaderArticleSection, Posts } from './styles'
 import PostCard from './components/post-card'
+import SearchInput from './components/search-input'
+import { Spacing } from '@/components/ui'
 
 export default function Home() {
   const postData = {
@@ -19,6 +21,15 @@ export default function Home() {
       <Header />
       <Profile />
       <Container>
+        <HeaderArticleSection>
+          <h5>Articles</h5>
+          <span>7 articles</span>
+        </HeaderArticleSection>
+
+        <Spacing apparence="s" />
+
+        <SearchInput />
+
         <Posts>
           <PostCard {...postData} />
           <PostCard {...postData} />
