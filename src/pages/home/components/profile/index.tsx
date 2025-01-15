@@ -10,9 +10,10 @@ import {
 import { Spacing, LinkButton } from '@/components/ui'
 import { getProfile, GitHubUser } from '@/services/get-profile'
 import { useQuery } from '@tanstack/react-query'
+import { ProfileSkeleton } from '@/components/skeletons/profile'
 
 export default function Profile() {
-  const { data } = useQuery<GitHubUser, Error>({
+  const { data, isLoading } = useQuery<GitHubUser, Error>({
     queryKey: ['githubProfile'],
     queryFn: () => getProfile(),
     staleTime: 5 * 1000, // Fresh data for 5 minutes
@@ -20,10 +21,12 @@ export default function Profile() {
   })
 
   return (
-    <Container>
-      <Content>
-        {data && (
-          <>
+    <>
+      {isLoading && <ProfileSkeleton />}
+
+      {data && (
+        <Container>
+          <Content>
             <LinkButton href={data.html_url}>GITHUB</LinkButton>
             <Picture src={data.avatar_url} />
 
@@ -52,9 +55,9 @@ export default function Profile() {
                 </SocialMedia>
               </SocialMediaGroup>
             </Description>
-          </>
-        )}
-      </Content>
-    </Container>
+          </Content>
+        </Container>
+      )}
+    </>
   )
 }
