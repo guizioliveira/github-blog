@@ -14,7 +14,9 @@ export interface GitHubPostRequest {
   created_at: string
 }
 
-export const getListPosts = async (page: number = 1): Promise<GitHubPost[]> => {
+export const getListPosts = async (
+  page: number = 1,
+): Promise<{ data: GitHubPost[]; nextPage?: number }> => {
   const username = import.meta.env.VITE_GITHUB_USER
   const repo = import.meta.env.VITE_GITHUB_REPO
 
@@ -32,11 +34,15 @@ export const getListPosts = async (page: number = 1): Promise<GitHubPost[]> => {
         },
       },
     )
-    return response.data.map((post) => ({
+    const data = response.data.map((post) => ({
       ...post,
-      summary: post.body?.substring(0, 181) + '...',
+      summary: post.body ? post.body.substring(0, 181) + '...' : '',
       createdAt: post.created_at,
     }))
+
+    const nextPage = data.length === 10 ? page + 1 : undefined
+
+    return { data, nextPage }
   } catch (error) {
     if (isAxiosError(error)) {
       if (error.response) {
