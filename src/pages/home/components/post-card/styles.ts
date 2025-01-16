@@ -41,4 +41,5 @@ export const HeaderContent = styled.div`
 
 export const Summary = styled.p`
   color: ${({ theme }) => theme.colors.base.span};
+  word-break: break-word;
 `

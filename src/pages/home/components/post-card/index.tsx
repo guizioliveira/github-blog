@@ -11,15 +11,13 @@ interface PostCardProps {
 }
 
 export default function PostCard({ title, summary, createdAt }: PostCardProps) {
-  const truncateText = (text: string) => text.substring(0, 181) + '...'
-
   return (
     <Container>
       <HeaderContent>
         <h3>{title}</h3>
         <span>{dayjs(createdAt).fromNow()}</span>
       </HeaderContent>
-      <Summary>{truncateText(summary)}</Summary>
+      <Summary>{summary}</Summary>
     </Container>
   )
 }

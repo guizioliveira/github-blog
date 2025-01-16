@@ -4,17 +4,19 @@ import { Container, HeaderArticleSection, Posts } from './styles'
 import PostCard from './components/post-card'
 import SearchInput from './components/search-input'
 import { Spacing } from '@/components/ui'
+import { getListPosts, GitHubPost } from '@/services/get-list-posts'
+import { useQuery } from '@tanstack/react-query'
+import { PostCardSkeleton } from '@/components/skeletons/post-card'
 
 export default function Home() {
-  const postData = {
-    title: 'JavaScript data types and data structure',
-    createdAt: '2025-01-11T21:26:43Z',
-    summary: `Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn. Dynamic typing JavaScript is a loosely typed and dynamic language. Variables in
-        JavaScript are not directly associated with any particular value type,
-        and any variable can be assigned (and re-assigned) values of all types:
-        let foo = 42; // foo is now a number foo = 'bar'; // foo is now a string
-        foo = true; // foo is now a boolean:`,
-  }
+  const { data, isLoading } = useQuery<GitHubPost[], Error>({
+    queryKey: ['githubPostList'],
+    queryFn: () => getListPosts(),
+    staleTime: 5 * 60 * 1000, // Fresh data for 5 minutes
+    retry: 2,
+  })
+
+  const articleCount = data ? data.length : 0
 
   return (
     <>
@@ -23,7 +25,7 @@ export default function Home() {
       <Container>
         <HeaderArticleSection>
           <h5>Articles</h5>
-          <span>7 articles</span>
+          <span>{articleCount} articles</span>
         </HeaderArticleSection>
 
         <Spacing apparence="s" />
@@ -31,13 +33,19 @@ export default function Home() {
         <SearchInput />
 
         <Posts>
-          <PostCard {...postData} />
-          <PostCard {...postData} />
-          <PostCard {...postData} />
-          <PostCard {...postData} />
-          <PostCard {...postData} />
-          <PostCard {...postData} />
-          <PostCard {...postData} />
+          {data?.map((post: GitHubPost) => (
+            <PostCard key={post.id} {...post} />
+          ))}
+
+          {isLoading && (
+            <>
+              <PostCardSkeleton />
+              <PostCardSkeleton />
+              <PostCardSkeleton />
+              <PostCardSkeleton />
+              <PostCardSkeleton />
+            </>
+          )}
         </Posts>
       </Container>
     </>
