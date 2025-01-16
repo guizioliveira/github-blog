@@ -1,15 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
-  max-width: calc(864px + 1.5rem);
-  width: 100%;
-  margin: 0 auto;
-  margin-top: -5.5rem;
-  padding: 0 1.5rem;
-  position: relative;
-`
-
-export const Content = styled.div`
+export const Content = styled.section`
   min-height: 212px;
 
   display: flex;
@@ -31,6 +22,11 @@ export const LinkButtonSkeleton = styled.div`
   position: absolute;
   top: 2rem;
   right: 2rem;
+
+  @media screen and (max-width: 768px) {
+    position: unset;
+    margin-bottom: -16px;
+  }
 `
 
 export const PictureSkeletonWrapper = styled.div`
@@ -62,6 +58,7 @@ export const SocialMediaGroupSkeleton = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  margin-top: 0.75rem;
 
   @media screen and (max-width: 768px) {
     gap: 1rem;

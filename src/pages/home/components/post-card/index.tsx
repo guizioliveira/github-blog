@@ -10,7 +10,7 @@ interface PostCardProps {
   createdAt: string
 }
 
-export default function PostCard({ title, summary, createdAt }: PostCardProps) {
+export function PostCard({ title, summary, createdAt }: PostCardProps) {
   return (
     <Container>
       <HeaderContent>

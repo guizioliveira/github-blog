@@ -1,16 +1,23 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.main`
   max-width: calc(864px + 1.5rem);
   width: 100%;
   padding: 0 1.5rem;
-  margin: 4.5rem auto 1.5rem;
+  margin: -5.5rem auto 1.5rem;
 `
 
-export const HeaderArticleSection = styled.div`
+export const SearchWraooer = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+`
+
+export const SearchHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 4.5rem;
 
   h5 {
     font: ${({ theme }) => theme.font.title.s};
@@ -21,11 +28,15 @@ export const HeaderArticleSection = styled.div`
     font: ${({ theme }) => theme.font.text.s};
     color: ${({ theme }) => theme.colors.base.span};
   }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 3rem;
+  }
 `
 
 export const Posts = styled.section`
   width: 100%;
-  margin-top: 3rem;
+  margin: 3rem auto 1.5rem;
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
