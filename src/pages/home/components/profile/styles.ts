@@ -36,6 +36,11 @@ export const Content = styled.div`
     flex-direction: column;
     align-items: center;
     font: ${({ theme }) => theme.font.text.s};
+
+    a {
+      position: unset;
+      margin-bottom: -16px;
+    }
   }
 `
 

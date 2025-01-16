@@ -27,6 +27,9 @@ export const HeaderContentSkeleton = styled.div`
   gap: 1rem;
 
   @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.5rem;
+
     span {
       max-width: 200px;
     }

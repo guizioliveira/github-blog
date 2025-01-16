@@ -31,15 +31,21 @@ export const HeaderContent = styled.div`
     flex: 1;
     font: ${({ theme }) => theme.font.title.m};
     color: ${({ theme }) => theme.colors.base.title};
+    word-break: break-word;
   }
 
   span {
     font: ${({ theme }) => theme.font.text.s};
     color: ${({ theme }) => theme.colors.base.span};
   }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 `
 
 export const Summary = styled.p`
-  color: ${({ theme }) => theme.colors.base.span};
+  color: ${({ theme }) => theme.colors.base.text};
   word-break: break-word;
 `
