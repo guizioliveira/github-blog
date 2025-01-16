@@ -61,4 +61,8 @@ export const MorePostsButton = styled.button`
   @media screen and (max-width: 768px) {
     margin: 0;
   }
+
+  @media screen and (max-width: 390px) {
+    padding: 0.75rem 2rem;
+  }
 `
