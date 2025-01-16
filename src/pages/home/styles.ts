@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   max-width: calc(864px + 1.5rem);
@@ -34,5 +34,31 @@ export const Posts = styled.section`
   @media screen and (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
+  }
+`
+
+export const MorePostsButton = styled.button`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.base.label};
+    font: ${theme.font.text.m};
+    color: ${theme.colors.white};
+  `}
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 auto;
+  padding: 0.75rem 3rem;
+
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.blue};
+  }
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
   }
 `

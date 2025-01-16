@@ -1,25 +1,36 @@
+import { Header } from '@/components/header'
+import { PostCardSkeleton } from '@/components/skeletons/post-card'
+import { Spacing } from '@/components/ui'
 import Profile from '@/pages/home/components/profile'
-import { Header } from '../../components/header'
-import { Container, HeaderArticleSection, Posts } from './styles'
+import { getListPosts, GitHubPost } from '@/services/get-list-posts'
+import { useInfiniteQuery } from '@tanstack/react-query'
+import React from 'react'
 import PostCard from './components/post-card'
 import SearchInput from './components/search-input'
-import { Spacing } from '@/components/ui'
-import { getListPosts, GitHubPost } from '@/services/get-list-posts'
-import { useQuery } from '@tanstack/react-query'
-import { PostCardSkeleton } from '@/components/skeletons/post-card'
+import {
+  Container,
+  HeaderArticleSection,
+  MorePostsButton,
+  Posts,
+} from './styles'
+import { FaAngleDown } from 'react-icons/fa'
+import { BackToTopButton } from '@/components/back-to-top-button'
 
 export default function Home() {
-  const { data, isLoading } = useQuery<GitHubPost[], Error>({
-    queryKey: ['githubPostList'],
-    queryFn: () => getListPosts(),
-    staleTime: 5 * 60 * 1000, // Fresh data for 5 minutes
-    retry: 2,
-  })
+  const { data, isFetching, fetchNextPage, isFetchingNextPage, hasNextPage } =
+    useInfiniteQuery({
+      queryKey: ['githubPostList'],
+      queryFn: ({ pageParam = 1 }) => getListPosts(pageParam),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.nextPage,
+    })
 
-  const articleCount = data ? data.length : 0
+  const articleCount =
+    data?.pages.reduce((acc, page) => acc + page.data.length, 0) || 0
 
   return (
     <>
+      <BackToTopButton />
       <Header />
       <Profile />
       <Container>
@@ -33,12 +44,17 @@ export default function Home() {
         <SearchInput />
 
         <Posts>
-          {data?.map((post: GitHubPost) => (
-            <PostCard key={post.id} {...post} />
+          {data?.pages.map((group, i) => (
+            <React.Fragment key={i}>
+              {group.data.map((post: GitHubPost) => (
+                <PostCard key={post.id} {...post} />
+              ))}
+            </React.Fragment>
           ))}
 
-          {isLoading && (
+          {(isFetching || isFetchingNextPage) && (
             <>
+              <PostCardSkeleton />
               <PostCardSkeleton />
               <PostCardSkeleton />
               <PostCardSkeleton />
@@ -47,6 +63,18 @@ export default function Home() {
             </>
           )}
         </Posts>
+        {hasNextPage && (
+          <>
+            <Spacing apparence="m" />
+            <MorePostsButton
+              onClick={() => fetchNextPage()}
+              disabled={isFetchingNextPage}
+            >
+              More posts
+              <FaAngleDown size={16} />
+            </MorePostsButton>
+          </>
+        )}
       </Container>
     </>
   )
