@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
 
   :focus {
     outline: 0;
+    box-shadow: inset 0 0 0 1px ${({ theme }) => theme.colors.blue};
   }
 
   body {

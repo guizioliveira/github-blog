@@ -64,6 +64,7 @@ export default function Home() {
             </>
           )}
         </Posts>
+
         {hasNextPage && (
           <MorePostsButton
             onClick={() => fetchNextPage()}
