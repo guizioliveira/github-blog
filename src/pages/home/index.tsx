@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Header } from '@/components/header'
 import { PostCardSkeleton } from '@/components/skeletons/post-card'
 import { Profile } from '@/pages/home/components/profile'
-import { getListPosts, GitHubPost } from '@/services/get-list-posts'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { GitHubPost } from '@/services/get-list-posts'
 import { PostCard } from './components/post-card'
 import { SearchInput } from './components/search-input'
 import {
@@ -15,18 +14,17 @@ import {
 } from './styles'
 import { FaAngleDown } from 'react-icons/fa'
 import { BackToTopButton } from '@/components/back-to-top-button'
+import { useDebounce } from '@/hooks/useDebounce'
+import { usePostsInfiniteQuery } from '@/hooks/usePostsInfiniteQuery'
 
 export default function Home() {
-  const { data, isFetching, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    useInfiniteQuery({
-      queryKey: ['githubPostList'],
-      queryFn: ({ pageParam = 1 }) => getListPosts(pageParam),
-      initialPageParam: 1,
-      getNextPageParam: (lastPage) => lastPage.nextPage,
-    })
+  const [searchTerm, setSearchTerm] = useState('')
+  const debouncedSearch = useDebounce(searchTerm, 500)
 
-  const articleCount =
-    data?.pages.reduce((acc, page) => acc + page.data.length, 0) || 0
+  const { data, isFetching, fetchNextPage, isFetchingNextPage, hasNextPage } =
+    usePostsInfiniteQuery({ searchTerm: debouncedSearch })
+
+  const articleCount = data?.pages[0]?.totalCount || 0
 
   return (
     <>
@@ -41,7 +39,10 @@ export default function Home() {
             <span>{articleCount} articles</span>
           </SearchHeader>
 
-          <SearchInput />
+          <SearchInput
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </SearchWraooer>
 
         <Posts>
