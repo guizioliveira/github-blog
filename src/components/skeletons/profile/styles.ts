@@ -68,4 +68,14 @@ export const SocialMediaSkeleton = styled.span`
   display: flex;
   gap: 0.5rem;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    span {
+      &:last-child {
+        span {
+          width: 60px !important;
+        }
+      }
+    }
+  }
 `
