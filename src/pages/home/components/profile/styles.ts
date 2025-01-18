@@ -1,16 +1,19 @@
 import styled, { css } from 'styled-components'
 
-export const Content = styled.section`
-  min-height: 212px;
-
-  display: flex;
-  align-items: flex-end;
-  gap: 2rem;
+export const Container = styled.section`
   padding: 2rem;
-  position: relative;
 
   background: ${({ theme }) => theme.colors.base.profile};
   border-radius: 10px;
+`
+
+export const Content = styled.div`
+  display: flex;
+  align-items: flex-end;
+  gap: 2rem;
+  position: relative;
+
+  min-height: 212px;
 
   ${({ theme }) => css`
     font: ${theme.font.text.m};
@@ -30,7 +33,7 @@ export const Content = styled.section`
 
     a {
       position: unset;
-      margin-bottom: -16px;
+      margin-bottom: -25px;
     }
   }
 `
@@ -95,4 +98,9 @@ export const Description = styled.div`
       font: ${({ theme }) => theme.font.title.m};
     }
   }
+`
+
+export const NoUserFound = styled.p`
+  font: ${({ theme }) => theme.font.text.l};
+  padding: 2rem 0;
 `
