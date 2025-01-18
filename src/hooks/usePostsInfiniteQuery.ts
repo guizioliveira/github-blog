@@ -16,5 +16,6 @@ export function usePostsInfiniteQuery({
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage,
     staleTime: 1000 * 60,
+    retry: 2,
   })
 }
