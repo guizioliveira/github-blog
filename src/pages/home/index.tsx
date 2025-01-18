@@ -8,6 +8,7 @@ import { SearchInput } from './components/search-input'
 import {
   Container,
   MorePostsButton,
+  NoDataMessage,
   Posts,
   SearchHeader,
   SearchWraooer,
@@ -32,10 +33,9 @@ export default function Home() {
       <Header />
       <Container>
         <Profile />
-
         <SearchWraooer>
           <SearchHeader>
-            <h5>Articles</h5>
+            <h3>Articles</h3>
             <span>{articleCount} articles</span>
           </SearchHeader>
 
@@ -44,7 +44,6 @@ export default function Home() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </SearchWraooer>
-
         <Posts>
           {data?.pages.map((group, i) => (
             <React.Fragment key={i}>
@@ -65,6 +64,13 @@ export default function Home() {
             </>
           )}
         </Posts>
+
+        {!data?.pages[0]?.data.length && (
+          <NoDataMessage>
+            <h3>No results</h3>
+            <p>Try adjusting your search filters.</p>
+          </NoDataMessage>
+        )}
 
         {hasNextPage && (
           <MorePostsButton

@@ -19,7 +19,7 @@ export const SearchHeader = styled.div`
   align-items: center;
   margin-top: 4.5rem;
 
-  h5 {
+  h3 {
     font: ${({ theme }) => theme.font.title.s};
     color: ${({ theme }) => theme.colors.base.subtitle};
   }
@@ -75,5 +75,17 @@ export const MorePostsButton = styled.button`
 
   @media screen and (max-width: 390px) {
     padding: 0.75rem 2rem;
+  }
+`
+
+export const NoDataMessage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    font: ${({ theme }) => theme.font.text.m};
+    color: ${({ theme }) => theme.colors.base.span};
   }
 `
