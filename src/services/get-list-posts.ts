@@ -14,9 +14,29 @@ export interface GitHubPostRequest {
   created_at: string
 }
 
-export const getListPosts = async (
-  page: number = 1,
-): Promise<{ data: GitHubPost[]; nextPage?: number }> => {
+export interface GitHubPostReturn {
+  data: GitHubPost[]
+  nextPage?: number
+  totalCount: number
+}
+
+function mapGitHubPosts(posts: GitHubPostRequest[]): GitHubPost[] {
+  return posts.map((post) => ({
+    ...post,
+    summary: post.body ? post.body.substring(0, 181) + '...' : '',
+    createdAt: post.created_at,
+  }))
+}
+
+export async function getPosts({
+  page = 1,
+  perPage = 10,
+  searchTerm = '',
+}: {
+  page?: number
+  perPage?: number
+  searchTerm?: string
+}): Promise<GitHubPostReturn> {
   const username = import.meta.env.VITE_GITHUB_USER
   const repo = import.meta.env.VITE_GITHUB_REPO
 
@@ -25,24 +45,31 @@ export const getListPosts = async (
   }
 
   try {
-    const response = await api.get<GitHubPostRequest[]>(
-      `/repos/${username}/${repo}/issues`,
-      {
-        params: {
-          per_page: 10,
-          page,
-        },
+    let q = `repo:${username}/${repo} is:issue in:title,body`
+
+    if (searchTerm) {
+      q += ` ${searchTerm}`
+    }
+
+    const response = await api.get<{
+      items: GitHubPostRequest[]
+      total_count: number
+    }>(`/search/issues`, {
+      params: {
+        q,
+        page,
+        per_page: perPage,
       },
-    )
-    const data = response.data.map((post) => ({
-      ...post,
-      summary: post.body ? post.body.substring(0, 181) + '...' : '',
-      createdAt: post.created_at,
-    }))
+    })
 
-    const nextPage = data.length === 10 ? page + 1 : undefined
+    // eslint-disable-next-line camelcase
+    const { items, total_count } = response.data
 
-    return { data, nextPage }
+    const data = mapGitHubPosts(items)
+    const nextPage = data.length === perPage ? page + 1 : undefined
+
+    // eslint-disable-next-line camelcase
+    return { data, totalCount: total_count, nextPage }
   } catch (error) {
     if (isAxiosError(error)) {
       if (error.response) {
