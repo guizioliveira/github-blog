@@ -19,6 +19,13 @@ export function Profile() {
     retry: 2,
   })
 
+  function compactNumberOfFollowers(followers: number) {
+    return new Intl.NumberFormat('en-US', {
+      notation: 'compact',
+      compactDisplay: 'short',
+    }).format(followers)
+  }
+
   return (
     <>
       {isLoading && <ProfileSkeleton />}
@@ -47,7 +54,7 @@ export function Profile() {
 
               <SocialMedia>
                 <FaUserFriends size={18} />
-                {data.followers} followers
+                {compactNumberOfFollowers(data.followers)} followers
               </SocialMedia>
             </SocialMediaGroup>
           </Description>
