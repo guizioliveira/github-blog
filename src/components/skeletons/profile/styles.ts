@@ -4,7 +4,7 @@ export const Content = styled.section`
   min-height: 212px;
 
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 2rem;
   padding: 2rem;
   position: relative;
@@ -58,7 +58,7 @@ export const SocialMediaGroupSkeleton = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin-top: 0.75rem;
+  margin-top: 1.5rem;
 
   @media screen and (max-width: 768px) {
     gap: 1rem;

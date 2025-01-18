@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.section`
+  position: relative;
   padding: 2rem;
 
   background: ${({ theme }) => theme.colors.base.profile};
@@ -9,11 +10,8 @@ export const Container = styled.section`
 
 export const Content = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 2rem;
-  position: relative;
-
-  min-height: 212px;
 
   ${({ theme }) => css`
     font: ${theme.font.text.m};
@@ -53,6 +51,7 @@ export const SocialMediaGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  margin-top: 1.5rem;
 
   @media screen and (max-width: 768px) {
     gap: 1rem;
@@ -83,10 +82,6 @@ export const Description = styled.div`
       color: ${theme.colors.base.title};
     }
   `}
-
-  p {
-    margin-bottom: 0.75rem;
-  }
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
