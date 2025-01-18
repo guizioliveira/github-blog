@@ -1,5 +1,17 @@
 import { Input } from './styles'
 
-export function SearchInput() {
-  return <Input type="text" placeholder="Search for content" />
+interface SearchInputProps {
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export function SearchInput({ value, onChange }: SearchInputProps) {
+  return (
+    <Input
+      type="text"
+      placeholder="Search for content"
+      value={value}
+      onChange={onChange}
+    />
+  )
 }
