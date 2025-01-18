@@ -65,7 +65,7 @@ export default function Home() {
           )}
         </Posts>
 
-        {!data?.pages[0]?.data.length && (
+        {!data?.pages[0]?.data.length && !isFetching && (
           <NoDataMessage>
             <h3>No results</h3>
             <p>Try adjusting your search filters.</p>
