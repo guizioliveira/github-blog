@@ -18,7 +18,7 @@ import { BackToTopButton } from '@/components/back-to-top-button'
 import { useDebounce } from '@/hooks/useDebounce'
 import { usePostsInfiniteQuery } from '@/hooks/usePostsInfiniteQuery'
 
-export default function Home() {
+export function Home() {
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedSearch = useDebounce(searchTerm, 500)
 
