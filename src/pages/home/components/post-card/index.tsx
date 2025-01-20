@@ -15,10 +15,10 @@ export function PostCard({
   title,
   summary,
   createdAt,
-  ...props
+  onClick,
 }: PostCardProps) {
   return (
-    <Button {...props}>
+    <Button onClick={onClick}>
       <HeaderContent>
         <h3>{title}</h3>
         <span>{dayjs(createdAt).fromNow()}</span>
