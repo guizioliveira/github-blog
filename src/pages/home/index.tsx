@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import { Header } from '@/components/header'
 import { PostCardSkeleton } from '@/components/skeletons/post-card'
 import { Profile } from '@/pages/home/components/profile'
 import { GitHubPost } from '@/services/get-list-posts'
 import { PostCard } from './components/post-card'
 import { SearchInput } from './components/search-input'
 import {
-  Container,
   MorePostsButton,
   NoDataMessage,
   Posts,
@@ -30,58 +28,55 @@ export function Home() {
   return (
     <>
       <BackToTopButton />
-      <Header />
-      <Container>
-        <Profile />
-        <SearchWraooer>
-          <SearchHeader>
-            <h3>Articles</h3>
-            <span>{articleCount} articles</span>
-          </SearchHeader>
+      <Profile />
+      <SearchWraooer>
+        <SearchHeader>
+          <h3>Articles</h3>
+          <span>{articleCount} articles</span>
+        </SearchHeader>
 
-          <SearchInput
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </SearchWraooer>
-        <Posts>
-          {data?.pages.map((group, i) => (
-            <React.Fragment key={i}>
-              {group.data.map((post: GitHubPost) => (
-                <PostCard key={post.id} {...post} />
-              ))}
-            </React.Fragment>
-          ))}
+        <SearchInput
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </SearchWraooer>
+      <Posts>
+        {data?.pages.map((group, i) => (
+          <React.Fragment key={i}>
+            {group.data.map((post: GitHubPost) => (
+              <PostCard key={post.id} {...post} />
+            ))}
+          </React.Fragment>
+        ))}
 
-          {(isFetching || isFetchingNextPage) && (
-            <>
-              <PostCardSkeleton />
-              <PostCardSkeleton />
-              <PostCardSkeleton />
-              <PostCardSkeleton />
-              <PostCardSkeleton />
-              <PostCardSkeleton />
-            </>
-          )}
-        </Posts>
-
-        {!data?.pages[0]?.data.length && !isFetching && (
-          <NoDataMessage>
-            <h3>No results</h3>
-            <p>Try adjusting your search filters.</p>
-          </NoDataMessage>
+        {(isFetching || isFetchingNextPage) && (
+          <>
+            <PostCardSkeleton />
+            <PostCardSkeleton />
+            <PostCardSkeleton />
+            <PostCardSkeleton />
+            <PostCardSkeleton />
+            <PostCardSkeleton />
+          </>
         )}
+      </Posts>
 
-        {hasNextPage && (
-          <MorePostsButton
-            onClick={() => fetchNextPage()}
-            disabled={isFetchingNextPage}
-          >
-            More posts
-            <FaAngleDown size={16} />
-          </MorePostsButton>
-        )}
-      </Container>
+      {!data?.pages[0]?.data.length && !isFetching && (
+        <NoDataMessage>
+          <h3>No results</h3>
+          <p>Try adjusting your search filters.</p>
+        </NoDataMessage>
+      )}
+
+      {hasNextPage && (
+        <MorePostsButton
+          onClick={() => fetchNextPage()}
+          disabled={isFetchingNextPage}
+        >
+          More posts
+          <FaAngleDown size={16} />
+        </MorePostsButton>
+      )}
     </>
   )
 }

@@ -1,12 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.main`
-  max-width: calc(864px + 3rem);
-  width: 100%;
-  padding: 0 1.5rem;
-  margin: -5.5rem auto 1.5rem;
-`
-
 export const SearchWraooer = styled.section`
   display: flex;
   flex-direction: column;
