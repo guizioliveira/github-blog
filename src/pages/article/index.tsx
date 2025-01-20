@@ -2,6 +2,8 @@ import { usePost } from '@/hooks/usePost'
 import { ArticleHeader } from './components/article-header'
 import { useParams } from 'react-router-dom'
 import ArticleHeaderSkeleton from '@/components/skeletons/article-header'
+import { BodyContent } from './styles'
+import MarkdownViewer from './components/markdown-viewer'
 
 export function Article() {
   const { id } = useParams()
@@ -20,7 +22,9 @@ export function Article() {
   return (
     <>
       <ArticleHeader data={headerData} />
-      <div>{body}</div>
+      <BodyContent>
+        <MarkdownViewer>{body}</MarkdownViewer>
+      </BodyContent>
     </>
   )
 }
