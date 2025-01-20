@@ -1,5 +1,4 @@
 import { LinkButton } from '@/components/ui'
-
 import {
   FaChevronLeft,
   FaGithub,
@@ -15,8 +14,13 @@ import {
   SocialMedia,
 } from './styles'
 import { useNavigate } from 'react-router-dom'
+import { Post } from '@/services/get-post'
 
-export function ArticleHeader() {
+interface ArticleHeader {
+  data: Omit<Post, 'body'>
+}
+
+export function ArticleHeader({ data }: ArticleHeader) {
   const navigate = useNavigate()
 
   return (
@@ -27,19 +31,17 @@ export function ArticleHeader() {
             <FaChevronLeft size={18} />
             BACK
           </LinkButton>
-          <LinkButton target="_blank">
+          <LinkButton target="_blank" href={data.githubUrl}>
             GO TO GITHUB <TbExternalLink size={18} />
           </LinkButton>
         </LinkGroup>
 
-        <h1>
-          Expose refs on DOM Components as Direct Handles to the actual DOM Node
-        </h1>
+        <h1>{data.title}</h1>
 
         <SocialMediaGroup>
           <SocialMedia>
             <FaGithub size={18} />
-            <span>guizioliveira</span>
+            <span>{data.username}</span>
           </SocialMedia>
 
           <SocialMedia>
@@ -49,7 +51,7 @@ export function ArticleHeader() {
 
           <SocialMedia>
             <FaComment size={18} />
-            <span>5 comments</span>
+            <span>{data.comments} comments</span>
           </SocialMedia>
         </SocialMediaGroup>
       </Content>
