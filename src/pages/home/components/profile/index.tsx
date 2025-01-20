@@ -12,6 +12,7 @@ import { LinkButton } from '@/components/ui'
 import { ProfileSkeleton } from '@/components/skeletons/profile'
 import { compactNumberFormatter } from '@/utils/formatters'
 import { useGithubProfile } from '@/hooks/useGithubProfile'
+import { TbExternalLink } from 'react-icons/tb'
 
 export function Profile() {
   const { data, isLoading } = useGithubProfile()
@@ -24,7 +25,9 @@ export function Profile() {
         <Container>
           {data ? (
             <Content>
-              <LinkButton href={data.html_url}>GITHUB</LinkButton>
+              <LinkButton href={data.html_url}>
+                GITHUB <TbExternalLink size={18} />
+              </LinkButton>
               <Picture src={data.avatar_url} />
 
               <Description>

@@ -1,16 +1,8 @@
-import { AnchorHTMLAttributes, ReactNode } from 'react'
+import { AnchorHTMLAttributes } from 'react'
 import { Link } from './styles'
-import { TbExternalLink } from 'react-icons/tb'
 
-interface LinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  children: ReactNode
-}
+type LinkButtonProps = AnchorHTMLAttributes<HTMLAnchorElement>
 
-export function LinkButton({ children, ...rest }: LinkButtonProps) {
-  return (
-    <Link target="_blank" {...rest}>
-      <span>{children}</span>
-      <TbExternalLink size={18} />
-    </Link>
-  )
+export function LinkButton(props: LinkButtonProps) {
+  return <Link target="_blank" {...props} />
 }
