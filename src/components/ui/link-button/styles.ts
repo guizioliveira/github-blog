@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Link = styled.a`
   display: flex;
+  align-items: center;
   gap: 0.5rem;
 
   color: ${({ theme }) => theme.colors.blue};
@@ -10,6 +11,8 @@ export const Link = styled.a`
 
   font: ${({ theme }) => theme.font.text.s};
   font-weight: bold;
+
+  cursor: pointer;
 
   &:hover {
     border-bottom: 1px solid ${({ theme }) => theme.colors.blue};
