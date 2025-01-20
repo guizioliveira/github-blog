@@ -25,7 +25,7 @@ export function Profile() {
         <Container>
           {data ? (
             <Content>
-              <LinkButton href={data.html_url}>
+              <LinkButton target="_blank" href={data.html_url}>
                 GITHUB <TbExternalLink size={18} />
               </LinkButton>
               <Picture src={data.avatar_url} />

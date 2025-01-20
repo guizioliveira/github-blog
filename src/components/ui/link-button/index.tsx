@@ -4,5 +4,5 @@ import { Link } from './styles'
 type LinkButtonProps = AnchorHTMLAttributes<HTMLAnchorElement>
 
 export function LinkButton(props: LinkButtonProps) {
-  return <Link target="_blank" {...props} />
+  return <Link {...props} />
 }
