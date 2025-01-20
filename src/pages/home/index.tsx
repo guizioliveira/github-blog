@@ -51,7 +51,7 @@ export function Home() {
                 <PostCard
                   key={id}
                   {...rest}
-                  onClick={() => navigate(`/articles/${post.id}`)}
+                  onClick={() => navigate(`/articles/${post.number}`)}
                 />
               )
             })}

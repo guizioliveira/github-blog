@@ -2,6 +2,7 @@ import { api, isAxiosError } from '@/lib/axios'
 
 export interface GitHubPost {
   id: number
+  number: number
   title: string
   summary: string
   createdAt: string
@@ -9,6 +10,7 @@ export interface GitHubPost {
 
 export interface GitHubPostRequest {
   id: number
+  number: number
   title: string
   body: string
   created_at: string
