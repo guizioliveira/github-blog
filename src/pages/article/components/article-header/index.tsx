@@ -15,6 +15,7 @@ import {
 } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { Post } from '@/services/get-post'
+import { compactNumberFormatter, formatDateRelative } from '@/utils/formatters'
 
 interface ArticleHeader {
   data: Omit<Post, 'body'>
@@ -46,12 +47,12 @@ export function ArticleHeader({ data }: ArticleHeader) {
 
           <SocialMedia>
             <FaCalendarDay size={18} />
-            <span>2 weeks ago</span>
+            <span>{formatDateRelative(data.createdAt)}</span>
           </SocialMedia>
 
           <SocialMedia>
             <FaComment size={18} />
-            <span>{data.comments} comments</span>
+            <span>{compactNumberFormatter(data.comments)} comments</span>
           </SocialMedia>
         </SocialMediaGroup>
       </Content>

@@ -28,7 +28,8 @@ export const SocialMediaGroup = styled.div`
   align-items: center;
 
   @media screen and (max-width: 768px) {
-    gap: 0.75rem;
+    justify-content: space-between;
+    gap: 0;
   }
 `
 
