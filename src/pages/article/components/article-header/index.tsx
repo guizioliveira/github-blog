@@ -14,13 +14,16 @@ import {
   SocialMediaGroup,
   SocialMedia,
 } from './styles'
+import { useNavigate } from 'react-router-dom'
 
 export function ArticleHeader() {
+  const navigate = useNavigate()
+
   return (
     <Container>
       <Content>
         <LinkGroup>
-          <LinkButton>
+          <LinkButton onClick={() => navigate('/')}>
             <FaChevronLeft size={18} />
             BACK
           </LinkButton>

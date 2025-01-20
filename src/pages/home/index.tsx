@@ -15,10 +15,12 @@ import { FaAngleDown } from 'react-icons/fa'
 import { BackToTopButton } from '@/components/back-to-top-button'
 import { useDebounce } from '@/hooks/useDebounce'
 import { usePostsInfiniteQuery } from '@/hooks/usePostsInfiniteQuery'
+import { useNavigate } from 'react-router-dom'
 
 export function Home() {
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedSearch = useDebounce(searchTerm, 500)
+  const navigate = useNavigate()
 
   const { data, isFetching, fetchNextPage, isFetchingNextPage, hasNextPage } =
     usePostsInfiniteQuery({ searchTerm: debouncedSearch })
@@ -43,9 +45,16 @@ export function Home() {
       <Posts>
         {data?.pages.map((group, i) => (
           <React.Fragment key={i}>
-            {group.data.map((post: GitHubPost) => (
-              <PostCard key={post.id} {...post} />
-            ))}
+            {group.data.map((post: GitHubPost) => {
+              const { id, ...rest } = post
+              return (
+                <PostCard
+                  key={id}
+                  {...rest}
+                  onClick={() => navigate(`/articles/${post.id}`)}
+                />
+              )
+            })}
           </React.Fragment>
         ))}
 

@@ -16,6 +16,10 @@ export const Content = styled.div`
     font: ${({ theme }) => theme.font.title.l};
     color: ${({ theme }) => theme.colors.base.title};
   }
+
+  @media screen and (max-width: 768px) {
+    gap: 1.5rem;
+  }
 `
 
 export const SocialMediaGroup = styled.div`
@@ -24,7 +28,7 @@ export const SocialMediaGroup = styled.div`
   align-items: center;
 
   @media screen and (max-width: 768px) {
-    gap: 1rem;
+    gap: 0.75rem;
   }
 `
 
@@ -54,4 +58,8 @@ export const LinkGroup = styled.div`
   justify-content: space-between;
 
   margin-bottom: 0.75rem;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 0;
+  }
 `
