@@ -1,12 +1,14 @@
 import { usePost } from '@/hooks/usePost'
 import { ArticleHeader } from './components/article-header'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ArticleHeaderSkeleton from '@/components/skeletons/article-header'
 import { BodyContent } from './styles'
 import MarkdownViewer from './components/markdown-viewer'
 
 export function Article() {
   const { id } = useParams()
+  const navigate = useNavigate()
+
   const { data, isLoading, isError } = usePost(Number(id))
 
   if (isLoading) {
@@ -14,7 +16,8 @@ export function Article() {
   }
 
   if (isError || !data) {
-    return <p>Not found</p>
+    navigate('/not-found')
+    return null
   }
 
   const { body, ...headerData } = data

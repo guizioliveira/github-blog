@@ -11,6 +11,7 @@ export const Button = styled.button`
 
   padding: 0.75rem 1rem;
 
+  font-weight: bold;
   color: white;
   background-color: ${({ theme }) => theme.colors.base.border};
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);

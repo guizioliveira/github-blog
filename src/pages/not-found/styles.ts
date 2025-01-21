@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.section`
   background-color: ${({ theme }) => theme.colors.base.profile};
@@ -9,7 +9,14 @@ export const Container = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
+  z-index: 10;
 
   h1 {
     font-family: ${({ theme }) => theme.font.family};
@@ -63,4 +70,28 @@ export const Vignette = styled.div`
     rgba(0, 0, 0, 0) 40%,
     rgba(0, 0, 0, 0.2) 100%
   );
+`
+
+export const Button = styled.button`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.base.label};
+    font: ${theme.font.text.m};
+    color: ${theme.colors.white};
+  `}
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 auto;
+  padding: 0.75rem 3rem;
+
+  font-weight: bold;
+
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.blue};
+  }
 `

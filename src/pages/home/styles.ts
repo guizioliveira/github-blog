@@ -46,6 +46,7 @@ export const MorePostsButton = styled.button`
     background-color: ${theme.colors.base.label};
     font: ${theme.font.text.m};
     color: ${theme.colors.white};
+    font-weight: bold;
   `}
 
   display: flex;
