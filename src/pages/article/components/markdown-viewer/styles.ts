@@ -4,6 +4,7 @@ export const MarkdownContainer = styled.div`
   ${({ theme }) => css`
     color: ${theme.colors.base.text};
     font: ${theme.font.text.m};
+    word-wrap: break-word;
 
     p,
     pre {
