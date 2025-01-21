@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ArticleHeaderSkeleton from '@/components/skeletons/article-header'
 import { BodyContent } from './styles'
 import MarkdownViewer from './components/markdown-viewer'
+import { BackToTopButton } from '@/components/back-to-top-button'
 
 export function Article() {
   const { id } = useParams()
@@ -24,6 +25,7 @@ export function Article() {
 
   return (
     <>
+      <BackToTopButton />
       <ArticleHeader data={headerData} />
       <BodyContent>
         <MarkdownViewer>{body}</MarkdownViewer>
