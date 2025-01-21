@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { PostCardSkeleton } from '@/components/skeletons/post-card'
 import { Profile } from '@/pages/home/components/profile'
 import { GitHubPost } from '@/services/get-list-posts'
@@ -15,17 +15,27 @@ import { FaAngleDown } from 'react-icons/fa'
 import { BackToTopButton } from '@/components/back-to-top-button'
 import { useDebounce } from '@/hooks/useDebounce'
 import { usePostsInfiniteQuery } from '@/hooks/usePostsInfiniteQuery'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 export function Home() {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const searchTerm = searchParams.get('q') || ''
+  const currentPage = Number(searchParams.get('page') || '1')
   const debouncedSearch = useDebounce(searchTerm, 500)
   const navigate = useNavigate()
 
   const { data, isFetching, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    usePostsInfiniteQuery({ searchTerm: debouncedSearch })
+    usePostsInfiniteQuery({
+      searchTerm: debouncedSearch,
+      initialPage: currentPage,
+    })
 
   const articleCount = data?.pages[0]?.totalCount || 0
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newSearchTerm = e.target.value
+    setSearchParams({ q: newSearchTerm })
+  }
 
   return (
     <>
@@ -37,10 +47,7 @@ export function Home() {
           <span>{articleCount} articles</span>
         </SearchHeader>
 
-        <SearchInput
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <SearchInput value={searchTerm} onChange={handleSearchChange} />
       </SearchWraooer>
       <Posts>
         {data?.pages.map((group, i) => (
@@ -51,7 +58,9 @@ export function Home() {
                 <PostCard
                   key={id}
                   {...rest}
-                  onClick={() => navigate(`/articles/${post.number}`)}
+                  onClick={() =>
+                    navigate(`/articles/${post.number}?q=${searchTerm}`)
+                  }
                 />
               )
             })}
@@ -79,7 +88,11 @@ export function Home() {
 
       {hasNextPage && (
         <MorePostsButton
-          onClick={() => fetchNextPage()}
+          onClick={() => {
+            const nextPage = currentPage + 1
+            setSearchParams({ q: searchTerm, page: String(nextPage) })
+            fetchNextPage()
+          }}
           disabled={isFetchingNextPage}
         >
           More posts

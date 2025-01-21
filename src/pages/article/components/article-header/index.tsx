@@ -13,7 +13,7 @@ import {
   SocialMediaGroup,
   SocialMedia,
 } from './styles'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Post } from '@/services/get-post'
 import { compactNumberFormatter, formatDateRelative } from '@/utils/formatters'
 
@@ -23,12 +23,19 @@ interface ArticleHeader {
 
 export function ArticleHeader({ data }: ArticleHeader) {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+
+  const searchTerm = searchParams.get('q') || ''
+
+  const handleBack = () => {
+    navigate(`/?q=${searchTerm}`)
+  }
 
   return (
     <Container>
       <Content>
         <LinkGroup>
-          <LinkButton onClick={() => navigate('/')}>
+          <LinkButton onClick={handleBack}>
             <FaChevronLeft size={18} />
             BACK
           </LinkButton>
