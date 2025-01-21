@@ -47,6 +47,15 @@ GitHub Blog is a web application that combines technology and simplicity to prov
 
 - **ESLint and Prettier**: Keep the code clean, beautiful, and consistent.
 
+## 📸 Screenshots
+
+![image](https://github.com/user-attachments/assets/259a1ff7-130d-4be1-a8d8-182e2bbf96ad)
+> Homepage wity github profile information and post list
+
+
+![image](https://github.com/user-attachments/assets/62378758-ac97-4a3e-a3a2-06c95a2e34b2)
+> Post detail page
+
 ## 🚀 How to Run the Project
 
 ### Prerequisites
@@ -89,7 +98,8 @@ Before starting, make sure you have:
 
 ## 📋 Next Steps
 
-- Testing: Implement unit and integration tests to ensure code quality.
+- Testing: Implement unit and integration tests to ensure code quality;
+- Add comment section in each post;
 
 ## 📝 Contributions
 
