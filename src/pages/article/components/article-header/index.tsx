@@ -12,6 +12,7 @@ import {
   LinkGroup,
   SocialMediaGroup,
   SocialMedia,
+  Sufix,
 } from './styles'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Post } from '@/services/get-post'
@@ -59,7 +60,9 @@ export function ArticleHeader({ data }: ArticleHeader) {
 
           <SocialMedia>
             <FaComment size={18} />
-            <span>{compactNumberFormatter(data.comments)} comments</span>
+            <span>
+              {compactNumberFormatter(data.comments)} <Sufix>comments</Sufix>
+            </span>
           </SocialMedia>
         </SocialMediaGroup>
       </Content>

@@ -65,5 +65,11 @@ export const MarkdownContainer = styled.div`
       background-color: ${theme.colors.base.border};
       margin: 2rem 0;
     }
+
+    @media screen and (max-width: 768px) {
+      code {
+        font-size: 0.75rem;
+      }
+    }
   `}
 `

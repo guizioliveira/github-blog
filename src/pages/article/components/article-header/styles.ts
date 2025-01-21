@@ -64,3 +64,9 @@ export const LinkGroup = styled.div`
     margin-bottom: 0;
   }
 `
+
+export const Sufix = styled.span`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
