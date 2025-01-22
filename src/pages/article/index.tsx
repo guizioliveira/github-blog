@@ -5,6 +5,7 @@ import ArticleHeaderSkeleton from '@/components/skeletons/article-header'
 import { BodyContent } from './styles'
 import MarkdownViewer from './components/markdown-viewer'
 import { BackToTopButton } from '@/components/back-to-top-button'
+import { Helmet } from 'react-helmet-async'
 
 export function Article() {
   const { id } = useParams()
@@ -25,6 +26,7 @@ export function Article() {
 
   return (
     <>
+      <Helmet title={headerData.title} />
       <BackToTopButton />
       <ArticleHeader data={headerData} />
       <BodyContent>

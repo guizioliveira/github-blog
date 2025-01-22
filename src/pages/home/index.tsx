@@ -16,6 +16,7 @@ import { BackToTopButton } from '@/components/back-to-top-button'
 import { useDebounce } from '@/hooks/useDebounce'
 import { usePostsInfiniteQuery } from '@/hooks/usePostsInfiniteQuery'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 
 export function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -39,6 +40,7 @@ export function Home() {
 
   return (
     <>
+      <Helmet title="Guilherme de Oliveira" />
       <BackToTopButton />
       <Profile />
       <SearchWraooer>
